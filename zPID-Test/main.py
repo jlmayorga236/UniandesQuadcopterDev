@@ -94,7 +94,7 @@ while True:
     PWM.set_duty_cycle("P9_14", value)
     print value
     print valz
-   
+   '''
     if imu.IMURead():
         # x, y, z = imu.getFusionData()
         # print("%f %f %f" % (x,y,z))
@@ -109,8 +109,7 @@ while True:
         valx = float( random.randrange(1, 100, 1))/float(random.randrange(1,50, 1)) 
         valy = float( random.randrange(1, 100, 1))/float(random.randrange(1,50, 1)) 
         valz = computeHeight(data["pressure"])
-        
-        
+    '''  
 
         #payload = {'Pitch': valPitch,'Roll': valRoll,'Yaw': valYaw,'x': valx,'y': valy,'z': valz}
         #r = requests.get("http://drone.ias-uniandes.com/setParameters_Quadcopter.php/get", params=payload)
@@ -121,4 +120,4 @@ while True:
 
         #time.sleep(poll_interval*1.0/1000.0)
 
-print requests.get("http://drone.ias-uniandes.com/setParameters_Quadcopter.php/get", params=payload).json()
+#print requests.get("http://drone.ias-uniandes.com/setParameters_Quadcopter.php/get", params=payload).json()
