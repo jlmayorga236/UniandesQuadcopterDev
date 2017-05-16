@@ -93,6 +93,10 @@ while True:
     value = (ADC.read("P9_40")-0.5)*20 + 60
     PWM.set_duty_cycle("P9_14", value)
     print value
-    print valz
+    payload = {'Pitch': valPitch,'Roll': valRoll,'Yaw': valYaw,'x': valx,'y': valy,'z': valz}
+    r = requests.get("http://drone.ias-uniandes.com/setParameters_Quadcopter.php/get", params=payload)
+    rjson = r.json()
+    jsonThrottle = float(rjson['Throttle'])
+    print jsonThrottle
 
    
