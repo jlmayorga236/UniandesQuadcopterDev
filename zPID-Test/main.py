@@ -64,7 +64,7 @@ def computeHeight(pressure):
     #print("Pressure sensor Init Failed")
 #else:
     #print("Pressure sensor Init Succeeded")
-
+poll_interval = 1
 #poll_interval = imu.IMUGetPollInterval()
 #print("Recommended Poll Interval: %dmS\n" % poll_interval)
 
