@@ -93,7 +93,7 @@ while True:
     value = (ADC.read("P9_40")-0.5)*20 + 60
     PWM.set_duty_cycle("P9_14", value)
     print value
-
+    print valz
    
     if imu.IMURead():
         # x, y, z = imu.getFusionData()
