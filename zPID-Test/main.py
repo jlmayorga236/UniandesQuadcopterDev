@@ -36,36 +36,36 @@ def computeHeight(pressure):
 # ----------------------------------------------------------- #
 # ---------- Init IMU --------------------------------------- #
 
-print("Using settings file " + SETTINGS_FILE + ".ini")
-if not os.path.exists(SETTINGS_FILE + ".ini"):
-    print("Settings file does not exist, will be created")
+#print("Using settings file " + SETTINGS_FILE + ".ini")
+#if not os.path.exists(SETTINGS_FILE + ".ini"):
+    #print("Settings file does not exist, will be created")
 
-s = RTIMU.Settings(SETTINGS_FILE)
-imu = RTIMU.RTIMU(s)
-pressure = RTIMU.RTPressure(s)
+#s = RTIMU.Settings(SETTINGS_FILE)
+#imu = RTIMU.RTIMU(s)
+#pressure = RTIMU.RTPressure(s)
 
-print("IMU Name: " + imu.IMUName())
-print("Pressure Name: " + pressure.pressureName())
+#print("IMU Name: " + imu.IMUName())
+#print("Pressure Name: " + pressure.pressureName())
 
-if (not imu.IMUInit()):
-    print("IMU Init Failed")
-    sys.exit(1)
-else:
-    print("IMU Init Succeeded");
+#if (not imu.IMUInit()):
+    #print("IMU Init Failed")
+    #sys.exit(1)
+#else:
+    #print("IMU Init Succeeded");
 
 # this is a good time to set any fusion parameters
 
-imu.setSlerpPower(0.02)
-imu.setGyroEnable(True)
-imu.setAccelEnable(True)
-imu.setCompassEnable(True)
+#imu.setSlerpPower(0.02)
+#imu.setGyroEnable(True)
+#imu.setAccelEnable(True)
+#imu.setCompassEnable(True)
 
-if (not pressure.pressureInit()):
-    print("Pressure sensor Init Failed")
-else:
-    print("Pressure sensor Init Succeeded")
+#if (not pressure.pressureInit()):
+    #print("Pressure sensor Init Failed")
+#else:
+    #print("Pressure sensor Init Succeeded")
 
-poll_interval = imu.IMUGetPollInterval()
+#poll_interval = imu.IMUGetPollInterval()
 print("Recommended Poll Interval: %dmS\n" % poll_interval)
 
 # --------------------------------------------------------------------------- #
@@ -94,30 +94,5 @@ while True:
     PWM.set_duty_cycle("P9_14", value)
     print value
     print valz
-   '''
-    if imu.IMURead():
-        # x, y, z = imu.getFusionData()
-        # print("%f %f %f" % (x,y,z))
-        data = imu.getIMUData()
-        (data["pressureValid"], data["pressure"], data["temperatureValid"], data["temperature"]) = pressure.pressureRead()
-        fusionPose = data["fusionPose"] 
 
-        valPitch = math.degrees(fusionPose[0])
-        valRoll = math.degrees(fusionPose[1])
-        valYaw = math.degrees(fusionPose[2])
-
-        valx = float( random.randrange(1, 100, 1))/float(random.randrange(1,50, 1)) 
-        valy = float( random.randrange(1, 100, 1))/float(random.randrange(1,50, 1)) 
-        valz = computeHeight(data["pressure"])
-    '''  
-
-        #payload = {'Pitch': valPitch,'Roll': valRoll,'Yaw': valYaw,'x': valx,'y': valy,'z': valz}
-        #r = requests.get("http://drone.ias-uniandes.com/setParameters_Quadcopter.php/get", params=payload)
-        #rjson = r.json()
-        #jsonThrottle = float(rjson['Throttle'])
-
-        #print jsonThrottle
-
-        #time.sleep(poll_interval*1.0/1000.0)
-
-#print requests.get("http://drone.ias-uniandes.com/setParameters_Quadcopter.php/get", params=payload).json()
+   
