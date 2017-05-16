@@ -77,14 +77,22 @@ while True:
     # print("%f %f %f" % (x,y,z))
     data = imu.getIMUData()
     (data["pressureValid"], data["pressure"], data["temperatureValid"], data["temperature"]) = pressure.pressureRead()
-    fusionPose = data["fusionPose"]
-    print("r: %f p: %f y: %f" % (math.degrees(fusionPose[0]), 
-        math.degrees(fusionPose[1]), math.degrees(fusionPose[2])))
-    if (data["pressureValid"]):
-        print("Pressure: %f, height above sea level: %f" % (data["pressure"], computeHeight(data["pressure"])))
-    if (data["temperatureValid"]):
-        print("Temperature: %f" % (data["temperature"]))
+    fusionPose = data["fusionPose"] 
+
+    valPitch = math.degrees(fusionPose[0])
+    valRoll = math.degrees(fusionPose[1])
+    valYaw = math.degrees(fusionPose[2])
+
+    valx = float( random.randrange(1, 100, 1))/float(random.randrange(1,50, 1)) 
+    valy = float( random.randrange(1, 100, 1))/float(random.randrange(1,50, 1)) 
+    valz = computeHeight(data["pressure"])
+    
+    payload = {'Pitch': valPitch,'Roll': valRoll,'Yaw': valYaw,'x': valx,'y': valy,'z': valz}
+    r = requests.get("http://drone.ias-uniandes.com/setParameters_Quadcopter.php/get", params=payload)
+    rjson = r.json()
+    jsonThrottle = float(rjson['Throttle'])
+    
+    print jsonThrottle
+    
     time.sleep(poll_interval*1.0/1000.0)
-
-
 
