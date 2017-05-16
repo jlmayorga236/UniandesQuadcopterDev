@@ -69,10 +69,32 @@ poll_interval = imu.IMUGetPollInterval()
 print("Recommended Poll Interval: %dmS\n" % poll_interval)
 
 # --------------------------------------------------------------------------- #
+ADC.setup()
+
+PWM.start("P9_14", 50,500, 0)
+PWM.set_duty_cycle("P9_14", 50.5)
+
+time.sleep(poll_interval*5.0/1000.0)
+
+PWM.set_duty_cycle("P9_14", 60.5)
+
+
+valPitch = 0
+valRoll = 0
+valYaw = 0
+
+valx = 0 
+valy = 0 
+valz = 0
 
 
 while True:
     print "Busy \n"
+    value = (ADC.read("P9_40")-0.5)*20 + 60
+    PWM.set_duty_cycle("P9_14", value)
+    print value
+
+   
     if imu.IMURead():
         # x, y, z = imu.getFusionData()
         # print("%f %f %f" % (x,y,z))
@@ -87,13 +109,16 @@ while True:
         valx = float( random.randrange(1, 100, 1))/float(random.randrange(1,50, 1)) 
         valy = float( random.randrange(1, 100, 1))/float(random.randrange(1,50, 1)) 
         valz = computeHeight(data["pressure"])
+        
+        
 
-        payload = {'Pitch': valPitch,'Roll': valRoll,'Yaw': valYaw,'x': valx,'y': valy,'z': valz}
-        r = requests.get("http://drone.ias-uniandes.com/setParameters_Quadcopter.php/get", params=payload)
-        rjson = r.json()
-        jsonThrottle = float(rjson['Throttle'])
+        #payload = {'Pitch': valPitch,'Roll': valRoll,'Yaw': valYaw,'x': valx,'y': valy,'z': valz}
+        #r = requests.get("http://drone.ias-uniandes.com/setParameters_Quadcopter.php/get", params=payload)
+        #rjson = r.json()
+        #jsonThrottle = float(rjson['Throttle'])
 
-        print jsonThrottle
+        #print jsonThrottle
 
-        time.sleep(poll_interval*1.0/1000.0)
+        #time.sleep(poll_interval*1.0/1000.0)
 
+print requests.get("http://drone.ias-uniandes.com/setParameters_Quadcopter.php/get", params=payload).json()
