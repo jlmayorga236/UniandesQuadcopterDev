@@ -66,7 +66,7 @@ def computeHeight(pressure):
     #print("Pressure sensor Init Succeeded")
 
 #poll_interval = imu.IMUGetPollInterval()
-print("Recommended Poll Interval: %dmS\n" % poll_interval)
+#print("Recommended Poll Interval: %dmS\n" % poll_interval)
 
 # --------------------------------------------------------------------------- #
 ADC.setup()
