@@ -72,27 +72,28 @@ print("Recommended Poll Interval: %dmS\n" % poll_interval)
 
 
 while True:
-  if imu.IMURead():
-    # x, y, z = imu.getFusionData()
-    # print("%f %f %f" % (x,y,z))
-    data = imu.getIMUData()
-    (data["pressureValid"], data["pressure"], data["temperatureValid"], data["temperature"]) = pressure.pressureRead()
-    fusionPose = data["fusionPose"] 
+    print "Busy \n"
+    if imu.IMURead():
+        # x, y, z = imu.getFusionData()
+        # print("%f %f %f" % (x,y,z))
+        data = imu.getIMUData()
+        (data["pressureValid"], data["pressure"], data["temperatureValid"], data["temperature"]) = pressure.pressureRead()
+        fusionPose = data["fusionPose"] 
 
-    valPitch = math.degrees(fusionPose[0])
-    valRoll = math.degrees(fusionPose[1])
-    valYaw = math.degrees(fusionPose[2])
+        valPitch = math.degrees(fusionPose[0])
+        valRoll = math.degrees(fusionPose[1])
+        valYaw = math.degrees(fusionPose[2])
 
-    valx = float( random.randrange(1, 100, 1))/float(random.randrange(1,50, 1)) 
-    valy = float( random.randrange(1, 100, 1))/float(random.randrange(1,50, 1)) 
-    valz = computeHeight(data["pressure"])
-    
-    payload = {'Pitch': valPitch,'Roll': valRoll,'Yaw': valYaw,'x': valx,'y': valy,'z': valz}
-    r = requests.get("http://drone.ias-uniandes.com/setParameters_Quadcopter.php/get", params=payload)
-    rjson = r.json()
-    jsonThrottle = float(rjson['Throttle'])
-    
-    print jsonThrottle
-    
-    time.sleep(poll_interval*1.0/1000.0)
+        valx = float( random.randrange(1, 100, 1))/float(random.randrange(1,50, 1)) 
+        valy = float( random.randrange(1, 100, 1))/float(random.randrange(1,50, 1)) 
+        valz = computeHeight(data["pressure"])
+
+        payload = {'Pitch': valPitch,'Roll': valRoll,'Yaw': valYaw,'x': valx,'y': valy,'z': valz}
+        r = requests.get("http://drone.ias-uniandes.com/setParameters_Quadcopter.php/get", params=payload)
+        rjson = r.json()
+        jsonThrottle = float(rjson['Throttle'])
+
+        print jsonThrottle
+
+        time.sleep(poll_interval*1.0/1000.0)
 
