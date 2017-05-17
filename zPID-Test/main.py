@@ -72,12 +72,22 @@ poll_interval = 1
 ADC.setup()
 
 PWM.start("P9_14", 50,500, 0)
+PWM.start("P9_16", 50,500, 0)
+PWM.start("P9_21", 50,500, 0)
+PWM.start("P9_22", 50,500, 0)
+
 PWM.set_duty_cycle("P9_14", 50.5)
+PWM.set_duty_cycle("P9_16", 50.5)
+PWM.set_duty_cycle("P9_21", 50.5)
+PWM.set_duty_cycle("P9_22", 50.5)
 
 time.sleep(poll_interval*5.0/1000.0)
 
 PWM.set_duty_cycle("P9_14", 60.5)
-
+PWM.set_duty_cycle("P9_16", 60.5)
+PWM.set_duty_cycle("P9_21", 60.5)
+PWM.set_duty_cycle("P9_22", 60.5)
+                   
 
 valPitch = 0
 valRoll = 0
@@ -90,13 +100,23 @@ valz = 0
 
 while True:
     print "Busy \n"
-    value = (ADC.read("P9_40")-0.5)*20 + 60
-    PWM.set_duty_cycle("P9_14", value)
-    print value
+    zValue= 100-100*ADC.read("P9_40")
+    print zValue
+    
     payload = {'Pitch': valPitch,'Roll': valRoll,'Yaw': valYaw,'x': valx,'y': valy,'z': valz}
     r = requests.get("http://drone.ias-uniandes.com/setParameters_Quadcopter.php/get", params=payload)
     rjson = r.json()
     jsonThrottle = float(rjson['Throttle'])
+    jsonM1 = float(rjson['M1'])
+    jsonM2 = float(rjson['M2'])
+    jsonM3 = float(rjson['M3'])
+    jsonM4 = float(rjson['M4'])
+    
+    PWM.set_duty_cycle("P9_14", jsonM1)
+    PWM.set_duty_cycle("P9_16", jsonM2)
+    PWM.set_duty_cycle("P9_21", jsonM3)
+    PWM.set_duty_cycle("P9_22", jsonM4)
+    
     print jsonThrottle
 
    
