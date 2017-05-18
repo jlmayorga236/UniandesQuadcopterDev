@@ -74,11 +74,7 @@ print "HI! Welcome to Dron Uniandes Dev & Resch"
 print  "......."
 print  "Initing ADC Pot..."
 ADC.setup()
-<<<<<<< HEAD
 print  "Initing PWM Ports for P19_14...P19_22
-=======
-print  "Initing PWM Ports for P19_14...P19_22"
->>>>>>> 13c7afee00eac4d2e12d3a30a4400655bcca1a75
 PWM.start("P9_14", 50,500, 0)
 PWM.start("P9_16", 50,500, 0)
 PWM.start("P9_21", 50,500, 0)
@@ -140,7 +136,6 @@ while True:
     except Exception,e:
         print "Hola :( Tuvimos un error y lo ignoramos,espero que no pase otra vez XD"
 	print e
-<<<<<<< HEAD
     	print r.status_code
     	r.raise_for_status()
     if imu.IMURead():
@@ -156,9 +151,7 @@ while True:
         if (data["temperatureValid"]):
             print("Temperature: %f" % (data["temperature"]))
         time.sleep(poll_interval*1.0/1000.0)
-=======
->>>>>>> 13c7afee00eac4d2e12d3a30a4400655bcca1a75
-    
+
     PWM.set_duty_cycle("P9_14", jsonM1)
     PWM.set_duty_cycle("P9_16", jsonM2)
     PWM.set_duty_cycle("P9_21", jsonM3)
