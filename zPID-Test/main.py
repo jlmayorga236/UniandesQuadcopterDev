@@ -69,8 +69,12 @@ poll_interval = 1
 #print("Recommended Poll Interval: %dmS\n" % poll_interval)
 
 # --------------------------------------------------------------------------- #
-ADC.setup()
+print "HI! Welcome to Dron Uniandes Dev & Resch"
 
+print  "......."
+print  "Initing ADC Pot..."
+ADC.setup()
+print  "Initing PWM Ports for P19_14...P19_22""
 PWM.start("P9_14", 50,500, 0)
 PWM.start("P9_16", 50,500, 0)
 PWM.start("P9_21", 50,500, 0)
@@ -81,8 +85,9 @@ PWM.set_duty_cycle("P9_16", 50.5)
 PWM.set_duty_cycle("P9_21", 50.5)
 PWM.set_duty_cycle("P9_22", 50.5)
 
-time.sleep(poll_interval*5.0/1000.0)
-
+print "Waiting one second ...."
+time.sleep(poll_interval*1.0/1000.0)
+print "Thats it, ready to go"
 PWM.set_duty_cycle("P9_14", 60.5)
 PWM.set_duty_cycle("P9_16", 60.5)
 PWM.set_duty_cycle("P9_21", 60.5)
@@ -98,20 +103,39 @@ valy = 0
 valz = 0
 
 k = 0
+
+jsonThrottle = 50
+jsonM1 = jsonThrottle + 3
+jsonM2 = jsonThrottle + 2
+jsonM3 = jsonThrottle
+jsonM4 = jsonThrottle - 2
+
+print "Entering while loop"
+
 while True:
+    print "-----------------------------------------------"
     print "Starting Iteration ["+str(k)+"]"
+    print "-----------------------------------------------"
+    print " "
+    print " "
     print "Reading ADC Value ...."
     zValue= 100-100*ADC.read("P9_40")
     print "Requesting GET ..."
     payload = {'Pitch': valPitch,'Roll': valRoll,'Yaw': valYaw,'x': valx,'y': valy,'z': valz}
     r = requests.get("http://drone.ias-uniandes.com/setParameters_Quadcopter.php/get", params=payload)
-    
-    rjson = r.json()
-    jsonThrottle = float(rjson['Throttle'])
-    jsonM1 = float(rjson['M1'])
-    jsonM2 = float(rjson['M2'])
-    jsonM3 = float(rjson['M3'])
-    jsonM4 = float(rjson['M4'])
+    try:
+    	r = requests.get("http://drone.ias-uniandes.com/setParameters_Quadcopter.php/get", params=payload,timeout=1)
+        rjson= r.json()
+    	jsonThrottle = float(rjson['Throttle'])
+    	jsonM1 = float(rjson['M1'])
+    	jsonM2 = float(rjson['M2'])
+    	jsonM3 = float(rjson['M3'])
+    	jsonM4 = float(rjson['M4'])
+    except Exception,e:
+        print "Hola :( Tuvimos un error y lo ignoramos,espero que no pase otra vez XD"
+	print e
+    	print r.status_code
+    	r.raise_for_status()
     
     PWM.set_duty_cycle("P9_14", jsonM1)
     PWM.set_duty_cycle("P9_16", jsonM2)
