@@ -177,9 +177,9 @@ while True:
         fusionPose = data["fusionPose"]
         #print("r: %f p: %f y: %f" % (math.degrees(fusionPose[0]), 
             #math.degrees(fusionPose[1]), math.degrees(fusionPose[2])))
-        if (data["pressureValid"]):
+        #if (data["pressureValid"]):
             #print("Pressure: %f, height above sea level: %f" % (data["pressure"], computeHeight(data["pressure"])))
-        if (data["temperatureValid"]):
+        #if (data["temperatureValid"]):
             #print("Temperature: %f" % (data["temperature"]))
         time.sleep(poll_interval*1.0/1000.0)
         
