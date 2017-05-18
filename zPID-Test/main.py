@@ -170,8 +170,8 @@ while True:
     	print r.status_code
     	r.raise_for_status()
     if imu.IMURead():
-        # x, y, z = imu.getFusionData()
-        # print("%f %f %f" % (x,y,z))
+        x, y, z = imu.getFusionData()
+        print("%f %f %f" % (x,y,z))
         data = imu.getIMUData()
         (data["pressureValid"], data["pressure"], data["temperatureValid"], data["temperature"]) = pressure.pressureRead()
         fusionPose = data["fusionPose"]
@@ -185,7 +185,7 @@ while True:
         
         Pitch = math.degrees(fusionPose[1]) - Pitch0
         Roll = math.degrees(fusionPose[2]) - Roll0
-        Yaw = math.degress(fusionPose[0]) - Yaw0
+        Yaw = math.degrees(fusionPose[0]) - Yaw0
 
     PWM.set_duty_cycle("P9_14", jsonM1)
     PWM.set_duty_cycle("P9_16", jsonM2)
