@@ -19,24 +19,29 @@ valYaw = 0
 valx = 0 
 valy = 0 
 valz = 0
-
+jsonThrottle = 0
 k = 0
 while True:
+    k = k+1
     print "Starting Iteration ["+str(k)+"]"
     print "Reading ADC Value ...."
     zValue= 45.325976
     print "Requesting GET ..."
     payload = {'Pitch': valPitch,'Roll': valRoll,'Yaw': valYaw,'x': valx,'y': valy,'z': valz}
-    r = requests.get("http://drone.ias-uniandes.com/setParameters_Quadcopter.php/get", params=payload)
-    print r.status_code
-    bad_r.raise_for_status()
-    rjson = r.json()
-    jsonThrottle = float(rjson['Throttle'])
-    jsonM1 = float(rjson['M1'])
-    jsonM2 = float(rjson['M2'])
-    jsonM3 = float(rjson['M3'])
-    jsonM4 = float(rjson['M4'])
-    
+    try:
+    	r = requests.get("http://drone.ias-uniandes.com/setParameters_Quadcopter.php/get", params=payload,timeout=1)
+        rjson= r.json()
+    	jsonThrottle = float(rjson['Throttle'])
+    	jsonM1 = float(rjson['M1'])
+    	jsonM2 = float(rjson['M2'])
+    	jsonM3 = float(rjson['M3'])
+    	jsonM4 = float(rjson['M4'])
+    except Exception,e:
+        print "Hola :( Tuvimos un error y lo ignoramos,espero que no pase otra vez XD"
+	print e
+    	print r.status_code
+    	r.raise_for_status()
+   
     print jsonThrottle
 
    
