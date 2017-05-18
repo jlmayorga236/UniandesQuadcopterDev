@@ -74,7 +74,7 @@ print "HI! Welcome to Dron Uniandes Dev & Resch"
 print  "......."
 print  "Initing ADC Pot..."
 ADC.setup()
-print  "Initing PWM Ports for P19_14...P19_22
+print  "Initing PWM Ports for P19_14...P19_22"
 PWM.start("P9_14", 50,500, 0)
 PWM.start("P9_16", 50,500, 0)
 PWM.start("P9_21", 50,500, 0)
