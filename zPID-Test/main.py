@@ -162,13 +162,12 @@ while True:
     	jsonM2 = float(rjson['M2'])
     	jsonM3 = float(rjson['M3'])
     	jsonM4 = float(rjson['M4'])
-	r = requests.session()
-	r.keep_alive = False
+        r = requests.session()
+        r.keep_alive = False
     except Exception,e:
         print "Hola :( Tuvimos un error y lo ignoramos,espero que no pase otra vez XD"
 	print e
-    	print r.status_code
-    	r.raise_for_status()
+    	print e
     if imu.IMURead():
         x, y, z = imu.getFusionData()
         data = imu.getIMUData()
@@ -189,14 +188,19 @@ while True:
         print Pitch
         print Roll
         print Yaw
+        
+        u1 = jsonM1 + 0.5*Pitch
+        u2 = jsonM2 + 0.5*Pitch
+        u3 = jsonM3 + 0.5*Roll
+        u4 = jsonM4 + 0.5*Roll
 
-    PWM.set_duty_cycle("P9_14", jsonM1)
-    PWM.set_duty_cycle("P9_16", jsonM2)
-    PWM.set_duty_cycle("P9_21", jsonM3)
-    PWM.set_duty_cycle("P9_22", jsonM4)
+    PWM.set_duty_cycle("P9_14", u1)
+    PWM.set_duty_cycle("P9_16", u2)
+    PWM.set_duty_cycle("P9_21", u3)
+    PWM.set_duty_cycle("P9_22", u4)
     
     print "Pitch:[" + str(Pitch) + "] "+" Roll:[" + str(Roll) + "] " + " Yaw:[" + str(Yaw) + "] "
-    print "M1 : " + str(jsonM1) +  "M2 : " + str(jsonM2)+  "M3 : " + str(jsonM3)+  "M4 : " + str(jsonM4)
+    print "M1 : " + str(u1) +  "M2 : " + str(u2)+  "M3 : " + str(u3)+  "M4 : " + str(u4)
     print "---------------------------------"
 
     
