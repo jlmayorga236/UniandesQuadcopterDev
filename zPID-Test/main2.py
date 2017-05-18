@@ -97,6 +97,9 @@ def init_IMU(SETTINGS_FILE):
 
 init_Board()
 [imu,poll_interval] = init_IMU(SETTINGS_FILE)    
+
+
+
 # --------------------------------------------------------------------------- #
 
                    
