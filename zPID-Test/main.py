@@ -102,6 +102,14 @@ valx = 0
 valy = 0 
 valz = 0
 
+Pitch = 0
+Roll = 0
+Yaw = 0
+
+Pitch0 = 0
+Roll0 = 0
+Yaw0 = 0
+
 k = 0
 
 jsonThrottle = 50
@@ -111,6 +119,29 @@ jsonM3 = jsonThrottle
 jsonM4 = jsonThrottle - 2
 
 print "Entering while loop"
+
+
+if imu.IMURead():
+    # x, y, z = imu.getFusionData()
+    # print("%f %f %f" % (x,y,z))
+    data = imu.getIMUData()
+    (data["pressureValid"], data["pressure"], data["temperatureValid"], data["temperature"]) = pressure.pressureRead()
+    fusionPose = data["fusionPose"]
+    print("r: %f p: %f y: %f" % (math.degrees(fusionPose[0]), 
+        math.degrees(fusionPose[1]), math.degrees(fusionPose[2])))
+    if (data["pressureValid"]):
+        print("Pressure: %f, height above sea level: %f" % (data["pressure"], computeHeight(data["pressure"])))
+    if (data["temperatureValid"]):
+        print("Temperature: %f" % (data["temperature"]))
+    time.sleep(poll_interval*1.0/1000.0)
+
+    Pitch = math.degrees(fusionPose[1]) - Pitch0
+    Roll = math.degrees(fusionPose[2]) - Roll0
+    Yaw = math.degress(fusionPose[0]) - Yaw0
+    
+    Pitch0 = Pitch
+    Roll0 = Roll
+    Yaw0 = Yaw
 
 while True:
     k = k +1
@@ -122,7 +153,7 @@ while True:
     print "Reading ADC Value ...."
     zValue= 100-100*ADC.read("P9_40")
     print "Requesting GET ..."
-    payload = {'Pitch': valPitch,'Roll': valRoll,'Yaw': valYaw,'x': valx,'y': valy,'z': valz}
+    payload = {'Pitch': Pitch,'Roll': Roll,'Yaw': Yaw,'x': valx,'y': valy,'z': zValue}
     try:
     	r = requests.get("http://drone.ias-uniandes.com/setParameters_Quadcopter.php/get", params=payload,timeout=5,headers={'Connection': 'close'})
         rjson= r.json()
@@ -151,6 +182,10 @@ while True:
         if (data["temperatureValid"]):
             print("Temperature: %f" % (data["temperature"]))
         time.sleep(poll_interval*1.0/1000.0)
+        
+        Pitch = math.degrees(fusionPose[1]) - Pitch0
+        Roll = math.degrees(fusionPose[2]) - Roll0
+        Yaw = math.degress(fusionPose[0]) - Yaw0
 
     PWM.set_duty_cycle("P9_14", jsonM1)
     PWM.set_duty_cycle("P9_16", jsonM2)
