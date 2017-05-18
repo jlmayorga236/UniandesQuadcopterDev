@@ -97,14 +97,15 @@ valx = 0
 valy = 0 
 valz = 0
 
-
+k = 0
 while True:
-    print "Busy \n"
+    print "Starting Iteration ["+str(k)+"]"
+    print "Reading ADC Value ...."
     zValue= 100-100*ADC.read("P9_40")
-    print zValue
-    
+    print "Requesting GET ..."
     payload = {'Pitch': valPitch,'Roll': valRoll,'Yaw': valYaw,'x': valx,'y': valy,'z': valz}
     r = requests.get("http://drone.ias-uniandes.com/setParameters_Quadcopter.php/get", params=payload)
+    
     rjson = r.json()
     jsonThrottle = float(rjson['Throttle'])
     jsonM1 = float(rjson['M1'])
