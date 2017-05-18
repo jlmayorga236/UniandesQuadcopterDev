@@ -182,9 +182,9 @@ while True:
             #print("Temperature: %f" % (data["temperature"]))
         time.sleep(poll_interval*1.0/1000.0)
         
-        Pitch = math.degrees(fusionPose[1]) - Pitch0 - 50
-        Roll = math.degrees(fusionPose[2]) - Roll0 + 12
-        Yaw = math.degrees(fusionPose[0]) - Yaw0 + 35
+        Pitch = math.degrees(fusionPose[1]) - Pitch0 - 50 +40
+        Roll = math.degrees(fusionPose[2]) - Roll0 + 12 -13
+        Yaw = math.degrees(fusionPose[0]) - Yaw0 + 35 -27
         
         print Pitch
         print Roll
