@@ -181,18 +181,18 @@ while True:
             #print("Temperature: %f" % (data["temperature"]))
         time.sleep(poll_interval*1.0/1000.0)
         
-        Pitch = math.degrees(fusionPose[1]) - Pitch0 - 50 +40
-        Roll = math.degrees(fusionPose[2]) - Roll0 + 12 -13
-        Yaw = math.degrees(fusionPose[0]) - Yaw0 + 35 -27
+        Pitch = math.degrees(fusionPose[1]) 
+        Roll = math.degrees(fusionPose[2])
+        Yaw = math.degrees(fusionPose[0]) 
         
         print Pitch
         print Roll
         print Yaw
         
-        u1 = jsonM1 + 0.5*Pitch
-        u2 = jsonM2 + 0.5*Pitch
-        u3 = jsonM3 + 0.5*Roll
-        u4 = jsonM4 + 0.5*Roll
+        u1 = min(100,jsonM1 + 0.0*Pitch)
+        u2 = min(100,jsonM2 + 0.0*Pitch
+        u3 = min(100,jsonM3 + 0.0*Roll)
+        u4 = min(100,jsonM4 + 0.0*Roll)
 
     PWM.set_duty_cycle("P9_14", u1)
     PWM.set_duty_cycle("P9_16", u2)
