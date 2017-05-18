@@ -185,7 +185,11 @@ while True:
         
         Pitch = math.degrees(fusionPose[1]) - Pitch0
         Roll = math.degrees(fusionPose[2]) - Roll0
-        Yaw = math.degrees(fusionPose[0]) - Yaw0
+        Yaw = math.degrees(fusionPose[!]]) - Yaw0
+        
+        print Pitch
+        print Roll
+        print Yaw
 
     PWM.set_duty_cycle("P9_14", jsonM1)
     PWM.set_duty_cycle("P9_16", jsonM2)
