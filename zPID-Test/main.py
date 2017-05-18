@@ -74,7 +74,11 @@ print "HI! Welcome to Dron Uniandes Dev & Resch"
 print  "......."
 print  "Initing ADC Pot..."
 ADC.setup()
+<<<<<<< HEAD
 print  "Initing PWM Ports for P19_14...P19_22
+=======
+print  "Initing PWM Ports for P19_14...P19_22"
+>>>>>>> 13c7afee00eac4d2e12d3a30a4400655bcca1a75
 PWM.start("P9_14", 50,500, 0)
 PWM.start("P9_16", 50,500, 0)
 PWM.start("P9_21", 50,500, 0)
@@ -113,6 +117,7 @@ jsonM4 = jsonThrottle - 2
 print "Entering while loop"
 
 while True:
+    k = k +1
     print "-----------------------------------------------"
     print "Starting Iteration ["+str(k)+"]"
     print "-----------------------------------------------"
@@ -122,18 +127,20 @@ while True:
     zValue= 100-100*ADC.read("P9_40")
     print "Requesting GET ..."
     payload = {'Pitch': valPitch,'Roll': valRoll,'Yaw': valYaw,'x': valx,'y': valy,'z': valz}
-    r = requests.get("http://drone.ias-uniandes.com/setParameters_Quadcopter.php/get", params=payload)
     try:
-    	r = requests.get("http://drone.ias-uniandes.com/setParameters_Quadcopter.php/get", params=payload,timeout=1)
+    	r = requests.get("http://drone.ias-uniandes.com/setParameters_Quadcopter.php/get", params=payload,timeout=5,headers={'Connection': 'close'})
         rjson= r.json()
     	jsonThrottle = float(rjson['Throttle'])
     	jsonM1 = float(rjson['M1'])
     	jsonM2 = float(rjson['M2'])
     	jsonM3 = float(rjson['M3'])
     	jsonM4 = float(rjson['M4'])
+	r = requests.session()
+	r.keep_alive = False
     except Exception,e:
         print "Hola :( Tuvimos un error y lo ignoramos,espero que no pase otra vez XD"
 	print e
+<<<<<<< HEAD
     	print r.status_code
     	r.raise_for_status()
     if imu.IMURead():
@@ -149,12 +156,16 @@ while True:
         if (data["temperatureValid"]):
             print("Temperature: %f" % (data["temperature"]))
         time.sleep(poll_interval*1.0/1000.0)
+=======
+>>>>>>> 13c7afee00eac4d2e12d3a30a4400655bcca1a75
     
     PWM.set_duty_cycle("P9_14", jsonM1)
     PWM.set_duty_cycle("P9_16", jsonM2)
     PWM.set_duty_cycle("P9_21", jsonM3)
     PWM.set_duty_cycle("P9_22", jsonM4)
     
-    print jsonThrottle
+    print "W0:[" + str(jsonThrottle) + "]%"
+    print "---------------------------------"
 
+    
    
