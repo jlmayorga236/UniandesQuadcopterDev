@@ -150,9 +150,9 @@ while True:
     print "-----------------------------------------------"
     print " "
     print " "
-    print "Reading ADC Value ...."
+    #print "Reading ADC Value ...."
     zValue= 100-100*ADC.read("P9_40")
-    print "Requesting GET ..."
+    #print "Requesting GET ..."
     payload = {'Pitch': Pitch,'Roll': Roll,'Yaw': Yaw,'x': valx,'y': valy,'z': zValue}
     try:
     	r = requests.get("http://drone.ias-uniandes.com/setParameters_Quadcopter.php/get", params=payload,timeout=5,headers={'Connection': 'close'})
@@ -175,12 +175,12 @@ while True:
         data = imu.getIMUData()
         (data["pressureValid"], data["pressure"], data["temperatureValid"], data["temperature"]) = pressure.pressureRead()
         fusionPose = data["fusionPose"]
-        print("r: %f p: %f y: %f" % (math.degrees(fusionPose[0]), 
-            math.degrees(fusionPose[1]), math.degrees(fusionPose[2])))
+        #print("r: %f p: %f y: %f" % (math.degrees(fusionPose[0]), 
+            #math.degrees(fusionPose[1]), math.degrees(fusionPose[2])))
         if (data["pressureValid"]):
-            print("Pressure: %f, height above sea level: %f" % (data["pressure"], computeHeight(data["pressure"])))
+            #print("Pressure: %f, height above sea level: %f" % (data["pressure"], computeHeight(data["pressure"])))
         if (data["temperatureValid"]):
-            print("Temperature: %f" % (data["temperature"]))
+            #print("Temperature: %f" % (data["temperature"]))
         time.sleep(poll_interval*1.0/1000.0)
         
         Pitch = math.degrees(fusionPose[1]) - Pitch0
@@ -196,7 +196,8 @@ while True:
     PWM.set_duty_cycle("P9_21", jsonM3)
     PWM.set_duty_cycle("P9_22", jsonM4)
     
-    print "W0:[" + str(jsonThrottle) + "]%"
+    print "Pitch:[" + str(Pitch) + "] "+" Roll:[" + str(Roll) + "] " + " Yaw:[" + str(Yaw) + "] "
+    print "M1 : " + str(jsonM1) +  "M2 : " + str(jsonM2)+  "M3 : " + str(jsonM3)+  "M4 : " + str(jsonM4)
     print "---------------------------------"
 
     
