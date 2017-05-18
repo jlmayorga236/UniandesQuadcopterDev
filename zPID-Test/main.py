@@ -190,7 +190,7 @@ while True:
         print Yaw
         
         u1 = min(100,jsonM1 + 0.0*Pitch)
-        u2 = min(100,jsonM2 + 0.0*Pitch
+        u2 = min(100,jsonM2 + 0.0*Pitch)
         u3 = min(100,jsonM3 + 0.0*Roll)
         u4 = min(100,jsonM4 + 0.0*Roll)
 
