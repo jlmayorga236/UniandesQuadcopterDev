@@ -120,28 +120,28 @@ jsonM4 = jsonThrottle - 2
 
 print "Entering while loop"
 
+for x in range(0, 10):
+    if imu.IMURead():
+        # x, y, z = imu.getFusionData()
+        # print("%f %f %f" % (x,y,z))
+        data = imu.getIMUData()
+        (data["pressureValid"], data["pressure"], data["temperatureValid"], data["temperature"]) = pressure.pressureRead()
+        fusionPose = data["fusionPose"]
+        print("r: %f p: %f y: %f" % (math.degrees(fusionPose[0]), 
+            math.degrees(fusionPose[1]), math.degrees(fusionPose[2])))
+        if (data["pressureValid"]):
+            print("Pressure: %f, height above sea level: %f" % (data["pressure"], computeHeight(data["pressure"])))
+        if (data["temperatureValid"]):
+            print("Temperature: %f" % (data["temperature"]))
+        time.sleep(poll_interval*1.0/1000.0)
 
-if imu.IMURead():
-    # x, y, z = imu.getFusionData()
-    # print("%f %f %f" % (x,y,z))
-    data = imu.getIMUData()
-    (data["pressureValid"], data["pressure"], data["temperatureValid"], data["temperature"]) = pressure.pressureRead()
-    fusionPose = data["fusionPose"]
-    print("r: %f p: %f y: %f" % (math.degrees(fusionPose[0]), 
-        math.degrees(fusionPose[1]), math.degrees(fusionPose[2])))
-    if (data["pressureValid"]):
-        print("Pressure: %f, height above sea level: %f" % (data["pressure"], computeHeight(data["pressure"])))
-    if (data["temperatureValid"]):
-        print("Temperature: %f" % (data["temperature"]))
-    time.sleep(poll_interval*1.0/1000.0)
+        Pitch = math.degrees(fusionPose[1]) - Pitch0
+        Roll = math.degrees(fusionPose[2]) - Roll0
+        Yaw = math.degrees(fusionPose[0]) - Yaw0
 
-    Pitch = math.degrees(fusionPose[1]) - Pitch0
-    Roll = math.degrees(fusionPose[2]) - Roll0
-    Yaw = math.degress(fusionPose[0]) - Yaw0
-    
-    Pitch0 = Pitch
-    Roll0 = Roll
-    Yaw0 = Yaw
+        Pitch0 = Pitch
+        Roll0 = Roll
+        Yaw0 = Yaw
 
 while True:
     k = k +1
@@ -185,7 +185,7 @@ while True:
         
         Pitch = math.degrees(fusionPose[1]) - Pitch0
         Roll = math.degrees(fusionPose[2]) - Roll0
-        Yaw = math.degrees(fusionPose[!]]) - Yaw0
+        Yaw = math.degrees(fusionPose[0]) - Yaw0
         
         print Pitch
         print Roll
