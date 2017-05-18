@@ -66,10 +66,8 @@ def init_IMU(SETTINGS_FILE):
 
     s = RTIMU.Settings(SETTINGS_FILE)
     imu = RTIMU.RTIMU(s)
-    pressure = RTIMU.RTPressure(s)
 
     print("IMU Name: " + imu.IMUName())
-    print("Pressure Name: " + pressure.pressureName())
 
     if (not imu.IMUInit()):
         print("IMU Init Failed")
@@ -83,15 +81,6 @@ def init_IMU(SETTINGS_FILE):
     imu.setGyroEnable(True)
     imu.setAccelEnable(True)
     imu.setCompassEnable(True)
-
-    if (not pressure.pressureInit()):
-        print("Pressure sensor Init Failed")
-    else:
-        print("Pressure sensor Init Succeeded")
-        poll_interval = 1
-        poll_interval = imu.IMUGetPollInterval()
-        print("Recommended Poll Interval: %dmS\n" % poll_interval)
-    return (imu,poll_interval)
 
 
 
