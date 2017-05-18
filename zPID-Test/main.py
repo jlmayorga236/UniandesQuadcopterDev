@@ -36,37 +36,37 @@ def computeHeight(pressure):
 # ----------------------------------------------------------- #
 # ---------- Init IMU --------------------------------------- #
 
-#print("Using settings file " + SETTINGS_FILE + ".ini")
-#if not os.path.exists(SETTINGS_FILE + ".ini"):
-    #print("Settings file does not exist, will be created")
+print("Using settings file " + SETTINGS_FILE + ".ini")
+if not os.path.exists(SETTINGS_FILE + ".ini"):
+    print("Settings file does not exist, will be created")
 
-#s = RTIMU.Settings(SETTINGS_FILE)
-#imu = RTIMU.RTIMU(s)
-#pressure = RTIMU.RTPressure(s)
+s = RTIMU.Settings(SETTINGS_FILE)
+imu = RTIMU.RTIMU(s)
+pressure = RTIMU.RTPressure(s)
 
-#print("IMU Name: " + imu.IMUName())
-#print("Pressure Name: " + pressure.pressureName())
+print("IMU Name: " + imu.IMUName())
+print("Pressure Name: " + pressure.pressureName())
 
-#if (not imu.IMUInit()):
-    #print("IMU Init Failed")
-    #sys.exit(1)
-#else:
-    #print("IMU Init Succeeded");
+if (not imu.IMUInit()):
+    print("IMU Init Failed")
+    sys.exit(1)
+else:
+    print("IMU Init Succeeded");
 
 # this is a good time to set any fusion parameters
 
-#imu.setSlerpPower(0.02)
-#imu.setGyroEnable(True)
-#imu.setAccelEnable(True)
-#imu.setCompassEnable(True)
+imu.setSlerpPower(0.02)
+imu.setGyroEnable(True)
+imu.setAccelEnable(True)
+imu.setCompassEnable(True)
 
-#if (not pressure.pressureInit()):
-    #print("Pressure sensor Init Failed")
-#else:
-    #print("Pressure sensor Init Succeeded")
+if (not pressure.pressureInit()):
+    print("Pressure sensor Init Failed")
+else:
+    print("Pressure sensor Init Succeeded")
 poll_interval = 1
-#poll_interval = imu.IMUGetPollInterval()
-#print("Recommended Poll Interval: %dmS\n" % poll_interval)
+poll_interval = imu.IMUGetPollInterval()
+print("Recommended Poll Interval: %dmS\n" % poll_interval)
 
 # --------------------------------------------------------------------------- #
 print "HI! Welcome to Dron Uniandes Dev & Resch"
@@ -136,6 +136,19 @@ while True:
 	print e
     	print r.status_code
     	r.raise_for_status()
+    if imu.IMURead():
+        # x, y, z = imu.getFusionData()
+        # print("%f %f %f" % (x,y,z))
+        data = imu.getIMUData()
+        (data["pressureValid"], data["pressure"], data["temperatureValid"], data["temperature"]) = pressure.pressureRead()
+        fusionPose = data["fusionPose"]
+        print("r: %f p: %f y: %f" % (math.degrees(fusionPose[0]), 
+            math.degrees(fusionPose[1]), math.degrees(fusionPose[2])))
+        if (data["pressureValid"]):
+            print("Pressure: %f, height above sea level: %f" % (data["pressure"], computeHeight(data["pressure"])))
+        if (data["temperatureValid"]):
+            print("Temperature: %f" % (data["temperature"]))
+        time.sleep(poll_interval*1.0/1000.0)
     
     PWM.set_duty_cycle("P9_14", jsonM1)
     PWM.set_duty_cycle("P9_16", jsonM2)
