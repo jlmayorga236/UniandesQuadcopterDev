@@ -42,6 +42,6 @@ while True:
             Pitch = math.degrees(x - Pitch0) -3
             Roll = math.degrees(y - Roll0) -3
             Yaw = math.degrees(z - Yaw0) -3
-            print("%f %f %f" % (math.degrees(Pitch),math.degrees(Roll),math.degrees(Yaw)))
+            print("%f %f %f" % (Pitch,Roll,Yaw))
  
             # -------------------------------------------------- #
