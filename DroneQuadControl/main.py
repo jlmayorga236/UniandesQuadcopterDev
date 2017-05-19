@@ -37,9 +37,7 @@ Init_Board()
 while True:
     if IMUData.IMURead():
             x, y, z = IMUData.getFusionData()
-            print("%f %f %f" % (x,y,z))
-            data = IMUData.getIMUData()
-            fusionPose = data["fusionPose"]
-            print("r: %f p: %f y: %f" % (math.degrees(fusionPose[0]),math.degrees(fusionPose[1]), math.degrees(fusionPose[2])))
+            print("%f %f %f" % (math.degrees(x),math.degrees(y),math.degrees(z))
+            
 
             # -------------------------------------------------- #
