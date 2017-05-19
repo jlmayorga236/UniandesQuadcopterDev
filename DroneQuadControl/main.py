@@ -39,9 +39,9 @@ Init_Board()
 while True:
     if IMUData.IMURead():
             x, y, z = IMUData.getFusionData()
-            x = x - Pitch0
-            y = y - Roll0
-            z = z - Yaw0
-            print("%f %f %f" % (math.degrees(x),math.degrees(y),math.degrees(z)))
+            Pitch = x - Pitch0
+            Roll = y - Roll0
+            Yaw = y - Yaw0
+            print("%f %f %f" % (math.degrees(Pitch),math.degrees(Roll),math.degrees(Yaw)))
  
             # -------------------------------------------------- #
