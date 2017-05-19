@@ -55,9 +55,9 @@ class ThreadIMU (threading.Thread):
 					Pitchm = 1/25*Pitchm + math.degrees(x - Pitch0) -3
 					Rollm = 1/25*Rollm + math.degrees(y - Roll0) +2
 					Yawm = 1/25*Yawm + math.degrees(z - Yaw0) -150
-			oPitch=Pitchm
-			oRoll = Rollm
-			oYaw = Yawm
+			oPitch=Pitchm/5
+			oRoll = Rollm/5
+			oYaw = Yawm/5
             k = 0
             while k<15:
 				k = k + 1
@@ -70,9 +70,9 @@ class ThreadIMU (threading.Thread):
 					Pitchm = 1/25*Pitchm + math.degrees(x - Pitch0) -3
 					Rollm = 1/25*Rollm + math.degrees(y - Roll0) +2
 					Yawm = 1/25*Yawm + math.degrees(z - Yaw0) -150
-			Pitch=Pitchm
-			Roll = Rollm
-			Yaw = Yawm
+			Pitch=Pitchm/5
+			Roll = Rollm/5
+			Yaw = Yawm/5
 
                 
 class ThreadControl (threading.Thread):
