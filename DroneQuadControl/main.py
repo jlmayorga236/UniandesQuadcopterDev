@@ -52,7 +52,7 @@ class ThreadIMU (threading.Thread):
                 print("%f %f %f" % (Pitch,Roll,Yaw))
                 
 class ThreadControl (threading.Thread):
-    def __init__(self, threadID, name,IMUData):
+    def __init__(self, threadID, name):
         threading.Thread.__init__(self)
         self.threadID = threadID
         self.name = name
@@ -66,10 +66,11 @@ class ThreadControl (threading.Thread):
         global M3 
         global M4
         while True:
-            M1 = 70 + 2.5*(0 - Pitch) - 2.5*(0 - Roll)
-            M2 = 70 - 2.5*(0 - Pitch) + 2.5*(0 - Roll)
-            M3 = 70 + 2.5*(0 - Pitch) - 2.5*(0 - Roll)
-            M4 = 70 - 2.5*(0 - Pitch) + 2.5*(0 - Roll) 
+            M1 = 0 + 2.5*(0 - Pitch) - 2.5*(0 - Roll)
+            M2 = 0 - 2.5*(0 - Pitch) + 2.5*(0 - Roll)
+            M3 = 0 + 2.5*(0 - Pitch) - 2.5*(0 - Roll)
+            M4 = 0 - 2.5*(0 - Pitch) + 2.5*(0 - Roll) 
+            SetMotorsPWM(70,M1,M2,M3,M4)
 
 class ThreadHTTP (threading.Thread):
     def __init__(self, threadID, name):
@@ -126,4 +127,5 @@ thread3 = ThreadControl(3, "Control Law")
 # Start new Threads
 thread1.start()
 thread2.start()
+thread3.start()
 # -------------------------------------------------- #
