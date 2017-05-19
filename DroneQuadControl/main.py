@@ -70,9 +70,9 @@ class ThreadIMU (threading.Thread):
                     Pitchm = 1/25*Pitchm + math.degrees(x - Pitch0) -3
                     Rollm = 1/25*Rollm + math.degrees(y - Roll0) +2
                     Yawm = 1/25*Yawm + math.degrees(z - Yaw0) -150
-            Pitch=Pitchm/5
-            Roll = Rollm/5
-            Yaw = Yawm/5
+                Pitch=Pitchm/5
+                Roll = Rollm/5
+                Yaw = Yawm/5
 
                 
 class ThreadControl (threading.Thread):
