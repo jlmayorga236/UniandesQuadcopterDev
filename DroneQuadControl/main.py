@@ -66,8 +66,8 @@ class ThreadControl (threading.Thread):
         global M4
         while True:
             
-            M1 = max(-10,min(10,0  + 0.15*(0 - Roll) + 0.5*(0 - Pitch)))
-            M2 = max(-10,min(10,0  - 0.15*(0 - Roll) + 0.5*(0 - Pitch)))
+            M1 = max(-10,min(10,0  + 0.15*(0 - Roll) + 0.75*(0 - Pitch)))
+            M2 = max(-10,min(10,0  - 0.15*(0 - Roll) + 0.75*(0 - Pitch)))
             M3 = max(-10,min(10,0  + 0.15*(0 - Roll) - 0.2*(0 - Pitch)))
             M4 = max(-10,min(10,0  - 0.15*(0 - Roll) - 0.2*(0 - Pitch)))
             SetMotorsPWM(85,M1,M2,M3,M4)
