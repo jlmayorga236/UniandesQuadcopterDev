@@ -44,7 +44,22 @@ class ThreadIMU (threading.Thread):
         global Yaw
         while True:
 			k = 0
-			while k<30:
+			while k<15:
+				k = k + 1
+				x, y, z = IMUData.getFusionData()
+				Pitchm = math.degrees(x - Pitch0) -3
+				Rollm = math.degrees(y - Roll0) +2
+				Yawm = math.degrees(z - Yaw0) -150
+				if IMUData.IMURead():
+					x, y, z = IMUData.getFusionData()
+					Pitchm = 1/25*Pitchm + math.degrees(x - Pitch0) -3
+					Rollm = 1/25*Rollm + math.degrees(y - Roll0) +2
+					Yawm = 1/25*Yawm + math.degrees(z - Yaw0) -150
+			oPitch=Pitchm
+			oRoll = Rollm
+			oYaw = Yawm
+            k = 0
+            while k<15:
 				k = k + 1
 				x, y, z = IMUData.getFusionData()
 				Pitchm = math.degrees(x - Pitch0) -3
@@ -69,6 +84,9 @@ class ThreadControl (threading.Thread):
         global Pitch
         global Roll
         global Yaw
+        global oPitch
+        global oRoll
+        global oYaw
         global z
         global M1
         global M2 
@@ -76,10 +94,10 @@ class ThreadControl (threading.Thread):
         global M4
         while True:
             
-            M1 = max(-5,min(10,0  + 0.1*(0 - Roll) + 0.15*(0 - Pitch)))
-            M2 = max(-5,min(10,0  - 0.1*(0 - Roll) + 0.15*(0 - Pitch)))
-            M3 = max(-5,min(10,0  + 0.1*(0 - Roll) - 0.1*(0 - Pitch)))
-            M4 = max(-5,min(10,0  - 0.1*(0 - Roll) - 0.1*(0 - Pitch)))
+            M1 = max(-5,min(10,0  + 0.1*(0 - Roll) + 0.15*(0 - Pitch)  + 0.1*(Roll - oRoll) + 0.15*(Pitch - oPitch) ))
+            M2 = max(-5,min(10,0  - 0.1*(0 - Roll) + 0.15*(0 - Pitch)  + 0.1*(Roll - oRoll) + 0.15*(Pitch - oPitch)))
+            M3 = max(-5,min(10,0  + 0.1*(0 - Roll) - 0.1*(0 - Pitch)   + 0.1*(Roll - oRoll) + 0.15*(Pitch - oPitch)))
+            M4 = max(-5,min(10,0  - 0.1*(0 - Roll) - 0.1*(0 - Pitch)   + 0.1*(Roll - oRoll) + 0.15*(Pitch - oPitch)))
      
             SetMotorsPWM(95,M1,M2,M3,M4)
 		
