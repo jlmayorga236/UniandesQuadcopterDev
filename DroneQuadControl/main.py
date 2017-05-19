@@ -43,12 +43,19 @@ class ThreadIMU (threading.Thread):
         global Roll
         global Yaw
         while True:
-            if IMUData.IMURead():
-                x, y, z = IMUData.getFusionData()
-                Pitch = math.degrees(x - Pitch0) -3
-                Roll = math.degrees(y - Roll0) +2
-                Yaw = math.degrees(z - Yaw0) -150
-                
+			k = 0
+			while k<25:
+				k = k + 1
+
+				if IMUData.IMURead():
+					x, y, z = IMUData.getFusionData()
+					Pitchm = 1/25*Pitchm + math.degrees(x - Pitch0) -3
+					Rollm = 1/25*Rollm + math.degrees(y - Roll0) +2
+					Yawm = 1/25*Yawm + math.degrees(z - Yaw0) -150
+			Pitch=Pitchm
+			Roll = Rollm
+			Yaw = Yawm
+
                 
 class ThreadControl (threading.Thread):
     def __init__(self, threadID, name):
