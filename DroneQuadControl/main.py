@@ -44,7 +44,7 @@ class ThreadIMU (threading.Thread):
         global Yaw
         while True:
 			k = 0
-			while k<25:
+			while k<30:
 				k = k + 1
 				x, y, z = IMUData.getFusionData()
 				Pitchm = math.degrees(x - Pitch0) -3
@@ -76,12 +76,13 @@ class ThreadControl (threading.Thread):
         global M4
         while True:
             
-            M1 = max(-10,min(10,0  + 0.1*(0 - Roll) + 0.1*(0 - Pitch)))
+            M1 = max(-10,min(10,0  + 0.1*(0 - Roll) + 0.15*(0 - Pitch)))
             M2 = max(-10,min(10,0  - 0.1*(0 - Roll) + 0.1*(0 - Pitch)))
             M3 = max(-10,min(10,0  + 0.1*(0 - Roll) - 0.1*(0 - Pitch)))
             M4 = max(-10,min(10,0  - 0.1*(0 - Roll) - 0.1*(0 - Pitch)))
      
-            SetMotorsPWM(80,M1,M2,M3,M4)
+            SetMotorsPWM(90,M1,M2,M3,M4)
+		
             print " "
             print("M1: %f M2: %f M3: %f M4: %f" % (M1,M2,M3,M4))
             print("Pitch: %f Roll: %f " % (Pitch,Roll))
