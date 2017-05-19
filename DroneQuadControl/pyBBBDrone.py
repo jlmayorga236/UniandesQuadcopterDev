@@ -22,8 +22,10 @@ import os.path
 # -------------------------------------------------- #
 # --- Parameters  ---------------------------------- #
 # -------------------------------------------------- #
-global BoardVersion = 3.2
-global SETTINGS_FILE = "RTIMULib"
+global BoardVersion 
+BoardVersion= 3.2
+global SETTINGS_FILE
+SETTINGS_FILE = "RTIMULib"
 W1_0 = 50 # % PWM's Duty Cycle  
 W2_0 = 50 # % PWM's Duty Cycle 
 W3_0 = 50 # % PWM's Duty Cycle 
