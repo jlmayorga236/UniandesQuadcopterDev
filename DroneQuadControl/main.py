@@ -43,7 +43,7 @@ class ThreadIMU (threading.Thread):
         global Roll
         global Yaw
         while True:
-			k = 0
+            k = 0
             while k<20:
                 k = k + 1
                 x, y, z = IMUData.getFusionData()
