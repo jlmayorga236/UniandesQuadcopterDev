@@ -68,8 +68,8 @@ class ThreadControl (threading.Thread):
             
             M1 = max(-10,min(10,0  + 0.15*(0 - Roll) + 0.75*(0 - Pitch)))
             M2 = max(-10,min(10,0  - 0.15*(0 - Roll) + 0.75*(0 - Pitch)))
-            M3 = max(-10,min(10,0  + 0.15*(0 - Roll) - 0.2*(0 - Pitch)))
-            M4 = max(-10,min(10,0  - 0.15*(0 - Roll) - 0.2*(0 - Pitch)))
+            M3 = max(-10,min(10,0  + 0.15*(0 - Roll) - 0.0*(0 - Pitch)))
+            M4 = max(-10,min(10,0  - 0.15*(0 - Roll) - 0.0*(0 - Pitch)))
             SetMotorsPWM(85,M1,M2,M3,M4)
             print " "
             print("M1: %f M2: %f M3: %f M4: %f" % (M1,M2,M3,M4))
