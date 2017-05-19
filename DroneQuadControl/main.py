@@ -70,7 +70,7 @@ class ThreadControl (threading.Thread):
             M2 = max(-10,min(10,0  - 0.2*(0 - Roll)))
             M3 = max(-10,min(10,0  + 0.2*(0 - Roll)))
             M4 = max(-10,min(10,0  - 0.2*(0 - Roll)))
-            SetMotorsPWM(70,M1,M2,M3,M4)
+            SetMotorsPWM(85,M1,M2,M3,M4)
             print " "
             print("M1: %f M2: %f M3: %f M4: %f" % (M1,M2,M3,M4))
             print("Pitch: %f Roll: %f " % (Pitch,Roll))
