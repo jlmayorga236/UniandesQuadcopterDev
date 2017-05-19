@@ -24,6 +24,9 @@ global Yaw
 global oPitch
 global oRoll
 global oYaw
+oPitch = 0.0
+oRoll = 0
+oYaw = 0
 Pitch = 0.0
 Roll = 0.0
 Yaw = 0.0
