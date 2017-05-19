@@ -107,10 +107,10 @@ def Init_IMU():
 # --- def 1.3 SetMotorsPWM() ------------------------ #
 # --------------------------------------------------- #
 def SetMotorsPWM(Throttle,M1,M2,M3,M4):
-    PWM.set_duty_cycle("P9_14", Throttle+M1)
-    PWM.set_duty_cycle("P9_16", Throttle+M2)
+    PWM.set_duty_cycle("P9_16", Throttle+M1)
+    PWM.set_duty_cycle("P9_22", Throttle+M2)
     PWM.set_duty_cycle("P9_21", Throttle+M3)
-    PWM.set_duty_cycle("P9_22", Throttle+M4)
+    PWM.set_duty_cycle("P9_14", Throttle+M4)
 # --------------------------------------------------- #
 
 
