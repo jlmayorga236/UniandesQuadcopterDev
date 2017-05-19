@@ -44,7 +44,7 @@ class ThreadIMU (threading.Thread):
         global Yaw
         while True:
 			k = 0
-            while k<15:
+            while k<20:
                 k = k + 1
                 x, y, z = IMUData.getFusionData()
                 Pitchm = math.degrees(x - Pitch0) -3
