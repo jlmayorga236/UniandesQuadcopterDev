@@ -38,8 +38,7 @@ while True:
     if IMUData.IMURead():
             x, y, z = IMUData.getFusionData()
             print("%f %f %f" % (x,y,z))
-            data = imu.getIMUData()
-            (data["pressureValid"], data["pressure"], data["temperatureValid"], data["temperature"]) = pressure.pressureRead()
+            data = IMUData.getIMUData()
             fusionPose = data["fusionPose"]
             print("r: %f p: %f y: %f" % (math.degrees(fusionPose[0]),math.degrees(fusionPose[1]), math.degrees(fusionPose[2])))
 
