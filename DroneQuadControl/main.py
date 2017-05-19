@@ -22,4 +22,9 @@ WelcomeMessage()
 Init_Board()
 [IMUSession,IMUData] = Init_IMU()
 
+
+if imu.IMURead():
+         x, y, z = imu.getFusionData()
+         print("%f %f %f" % (x,y,z))
+        
 # -------------------------------------------------- #

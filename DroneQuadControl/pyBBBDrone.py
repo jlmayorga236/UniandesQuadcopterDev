@@ -90,14 +90,14 @@ def Init_IMU():
     print " "
     s = RTIMU.Settings(SETTINGS_FILE)
     imu = RTIMU.RTIMU(s)
-    print " Setting IMU Preferences"
-    print("IMU Name: " + imu.IMUName())
+    print "  Setting IMU Preferences"
+    print("  IMU Name: " + imu.IMUName())
     print " "
     if (not imu.IMUInit()):
-        print("IMU Init Failed")
+        print("   IMU Init Failed")
         sys.exit(1)
     else:
-        print("IMU Init Succeeded");
+        print("   IMU Init Succeeded");
     # Fusion Parameters
     imu.setSlerpPower(0.02)
     imu.setGyroEnable(True)
