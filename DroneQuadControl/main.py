@@ -49,7 +49,6 @@ class ThreadIMU (threading.Thread):
                 Roll = math.degrees(y - Roll0) +2
                 Yaw = math.degrees(z - Yaw0) -150
                 
-                print("%f %f %f" % (Pitch,Roll,Yaw))
                 
 class ThreadControl (threading.Thread):
     def __init__(self, threadID, name):
@@ -71,6 +70,7 @@ class ThreadControl (threading.Thread):
             M3 = 0 + 2.5*(0 - Pitch) - 2.5*(0 - Roll)
             M4 = 0 - 2.5*(0 - Pitch) + 2.5*(0 - Roll) 
             SetMotorsPWM(70,M1,M2,M3,M4)
+            print("M1: %f M2: %f M3: %f M4: %f" % (M1,M2,M3,M4))
 
 class ThreadHTTP (threading.Thread):
     def __init__(self, threadID, name):
