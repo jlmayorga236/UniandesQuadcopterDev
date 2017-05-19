@@ -34,9 +34,14 @@ WelcomeMessage()
 Init_Board()
 [IMUSession,IMUData] = Init_IMU()
 
+[Pitch0,Roll0,Yaw0] = GetInitialAngles(IMUData):
+
 while True:
-    x, y, z = IMUData.getFusionData()
-    print("%f %f %f" % (math.degrees(x),math.degrees(y),math.degrees(z)))
-    #if IMUData.IMURead():
-            
+    if IMUData.IMURead():
+            x, y, z = IMUData.getFusionData()
+            x = x - Pitch0
+            y = y - Roll0
+            z = z - Yaw0
+            print("%f %f %f" % (math.degrees(x),math.degrees(y),math.degrees(z)))
+ 
             # -------------------------------------------------- #

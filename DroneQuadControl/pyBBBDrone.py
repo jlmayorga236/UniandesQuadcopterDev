@@ -116,3 +116,23 @@ def SetMotorsPWM(Throttle,M1,M2,M3,M4):
     PWM.set_duty_cycle("P9_22", Throttle+M4)
 # --------------------------------------------------- #
 
+
+
+# --------------------------------------------------- #
+# --- def 2.0 GetInitialAngles() -------------------- #
+# --------------------------------------------------- #
+def GetInitialAngles(IMU):
+    k = 0
+    Pitch_m = 0
+    Roll_m = 0
+    Yaw_m = 0
+    while k<50:
+        if IMUData.IMURead():
+                k = k + 1
+                x, y, z = IMUData.getFusionData()
+                Pitch_m = 1/25*math.degrees(x) + Pitch_m
+                Roll_m = 1/25*math.degrees(y) + Roll_m
+                Yaw_m = 1/25*math.degrees(x) + Yaw_m
+    return (Pitch_m,Roll_m,Yaw_m)
+                
+# --------------------------------------------------- #
