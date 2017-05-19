@@ -65,11 +65,11 @@ class ThreadControl (threading.Thread):
         global M3 
         global M4
         while True:
-            M1 = max(-10,min(10,0 + 2.5*(0 - Pitch) - 2.5*(0 - Roll)))
-            M2 = max(-10,min(10,0 - 2.5*(0 - Pitch) + 2.5*(0 - Roll)))
-            M3 = max(-10,min(10,0 + 2.5*(0 - Pitch) - 2.5*(0 - Roll)))
-            M4 = max(-10,min(10,0 - 2.5*(0 - Pitch) + 2.5*(0 - Roll)))
-            SetMotorsPWM(70,M1,M2,M3,M4)
+            M1 = max(-12,min(12,0 + 0.5*(0 - Pitch) - 0.5*(0 - Roll)))
+            M2 = max(-12,min(12,0 - 0.5*(0 - Pitch) + 0.5*(0 - Roll)))
+            M3 = max(-12,min(12,0 + 0.5*(0 - Pitch) - 0.5*(0 - Roll)))
+            M4 = max(-12,min(12,0 - 0.5*(0 - Pitch) + 0.5*(0 - Roll)))
+            SetMotorsPWM(80,M1,M2,M3,M4)
             print("M1: %f M2: %f M3: %f M4: %f" % (M1,M2,M3,M4))
 
 class ThreadHTTP (threading.Thread):
