@@ -34,7 +34,7 @@ WelcomeMessage()
 Init_Board()
 [IMUSession,IMUData] = Init_IMU()
 
-[Pitch0,Roll0,Yaw0] = GetInitialAngles(IMUData):
+[Pitch0,Roll0,Yaw0] = GetInitialAngles(IMUData)
 
 while True:
     if IMUData.IMURead():

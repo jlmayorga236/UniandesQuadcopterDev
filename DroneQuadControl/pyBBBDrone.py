@@ -127,12 +127,12 @@ def GetInitialAngles(IMU):
     Roll_m = 0
     Yaw_m = 0
     while k<50:
-        if IMUData.IMURead():
+        if IMU.IMURead():
                 k = k + 1
-                x, y, z = IMUData.getFusionData()
-                Pitch_m = 1/25*math.degrees(x) + Pitch_m
-                Roll_m = 1/25*math.degrees(y) + Roll_m
-                Yaw_m = 1/25*math.degrees(x) + Yaw_m
+                x, y, z = IMU.getFusionData()
+                Pitch_m = 1/25*x + Pitch_m
+                Roll_m = 1/25*y + Roll_m
+                Yaw_m = 1/25*z + Yaw_m
     return (Pitch_m,Roll_m,Yaw_m)
                 
 # --------------------------------------------------- #
