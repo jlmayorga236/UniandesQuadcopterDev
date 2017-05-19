@@ -51,6 +51,23 @@ class ThreadIMU (threading.Thread):
                 
                 print("%f %f %f" % (Pitch,Roll,Yaw))
                 
+class ThreadControl (threading.Thread):
+    def __init__(self, threadID, name,IMUData):
+        threading.Thread.__init__(self)
+        self.threadID = threadID
+        self.name = name
+    def run(self):
+        global Pitch
+        global Roll
+        global Yaw
+        global z
+        global M1 = 70 + 2.5*(0 - Pitch) - 2.5*(0 - Roll)
+        global M2 = 70 - 2.5*(0 - Pitch) + 2.5*(0 - Roll)
+        global M3 = 70 + 2.5*(0 - Pitch) - 2.5*(0 - Roll)
+        global M4 = 70 - 2.5*(0 - Pitch) + 2.5*(0 - Roll)
+        while True:
+            W1 = 
+
 class ThreadHTTP (threading.Thread):
     def __init__(self, threadID, name):
         threading.Thread.__init__(self)
@@ -101,6 +118,7 @@ Init_Board()
 # Create new threads
 thread1 = ThreadIMU(1, "IMU DAQ", IMUData)
 thread2 = ThreadHTTP(2, "HTTP Control")
+thread3 = ThreadControl(3, "Control Law")
 
 # Start new Threads
 thread1.start()
