@@ -35,8 +35,8 @@ Init_Board()
 [IMUSession,IMUData] = Init_IMU()
 
 while True:
-    if IMUData.IMURead():
-            x, y, z = IMUData.getFusionData()
-            print("%f %f %f" % (math.degrees(x),math.degrees(y),math.degrees(z)))
- 
+    x, y, z = IMUData.getFusionData()
+    print("%f %f %f" % (math.degrees(x),math.degrees(y),math.degrees(z)))
+    #if IMUData.IMURead():
+            
             # -------------------------------------------------- #
