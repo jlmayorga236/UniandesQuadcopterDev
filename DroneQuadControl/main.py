@@ -40,7 +40,7 @@ while True:
     if IMUData.IMURead():
             x, y, z = IMUData.getFusionData()
             Pitch = math.degrees(x - Pitch0) -3
-            Roll = math.degrees(y - Roll0) -3
+            Roll = math.degrees(y - Roll0) +2
             Yaw = math.degrees(z - Yaw0) -3
             print("%f %f %f" % (Pitch,Roll,Yaw))
  
