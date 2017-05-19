@@ -70,9 +70,6 @@ def Init_Board():
     print " "    
     # Delay for Motors Set Up
     time.sleep(0.1)
-    PWM.start("P9_14", 62,500, 0)
-    PWM.start("P9_16", 62,500, 0)
-    PWM.start("P9_21", 62,500, 0)
     print "Everthing OK in Init_Board XD No ban please :P"
     print " "
 # --------------------------------------------------- #
