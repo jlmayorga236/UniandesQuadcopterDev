@@ -46,7 +46,10 @@ class ThreadIMU (threading.Thread):
 			k = 0
 			while k<25:
 				k = k + 1
-
+				x, y, z = IMUData.getFusionData()
+				Pitchm = math.degrees(x - Pitch0) -3
+				Rollm = math.degrees(y - Roll0) +2
+				Yawm = math.degrees(z - Yaw0) -150
 				if IMUData.IMURead():
 					x, y, z = IMUData.getFusionData()
 					Pitchm = 1/25*Pitchm + math.degrees(x - Pitch0) -3
