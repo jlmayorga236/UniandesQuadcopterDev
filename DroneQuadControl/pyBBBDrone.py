@@ -22,8 +22,8 @@ import os.path
 # -------------------------------------------------- #
 # --- Parameters  ---------------------------------- #
 # -------------------------------------------------- #
-BoardVersion = 3.2
-SETTINGS_FILE = "RTIMULib"
+global BoardVersion = 3.2
+global SETTINGS_FILE = "RTIMULib"
 W1_0 = 50 # % PWM's Duty Cycle  
 W2_0 = 50 # % PWM's Duty Cycle 
 W3_0 = 50 # % PWM's Duty Cycle 
@@ -52,7 +52,7 @@ def WelcomeMessage():
 # --- def 1.2 Init_Board() -------------------------- #
 # --------------------------------------------------- #
 def Init_Board():
-    print ".............................................."
+    print "......................."
     print "Init_Board ..."
     print " "
     print "     Initing ADC module"
@@ -72,6 +72,7 @@ def Init_Board():
     PWM.start("P9_16", 62,500, 0)
     PWM.start("P9_21", 62,500, 0)
     print "Everthing OK in Init_Board XD No ban please :P"
+    print " "
 # --------------------------------------------------- #
 
 
@@ -79,8 +80,8 @@ def Init_Board():
 # --------------------------------------------------- #
 # --- def 1.2 Init_IMU()-- -------------------------- #
 # --------------------------------------------------- #
-def Init_IMU(SETTINGS_FILE):
-    print  ".............................................."
+def Init_IMU():
+    print  "......................."
     print("Using settings file " + SETTINGS_FILE + ".ini")
     if not os.path.exists(SETTINGS_FILE + ".ini"):
         print("Settings file does not exist, will be created")
