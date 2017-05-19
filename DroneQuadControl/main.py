@@ -44,35 +44,35 @@ class ThreadIMU (threading.Thread):
         global Yaw
         while True:
 			k = 0
-			while k<15:
-				k = k + 1
-				x, y, z = IMUData.getFusionData()
-				Pitchm = math.degrees(x - Pitch0) -3
-				Rollm = math.degrees(y - Roll0) +2
-				Yawm = math.degrees(z - Yaw0) -150
-				if IMUData.IMURead():
-					x, y, z = IMUData.getFusionData()
-					Pitchm = 1/25*Pitchm + math.degrees(x - Pitch0) -3
-					Rollm = 1/25*Rollm + math.degrees(y - Roll0) +2
-					Yawm = 1/25*Yawm + math.degrees(z - Yaw0) -150
-			oPitch=Pitchm/5
-			oRoll = Rollm/5
-			oYaw = Yawm/5
+            while k<15:
+                k = k + 1
+                x, y, z = IMUData.getFusionData()
+                Pitchm = math.degrees(x - Pitch0) -3
+                Rollm = math.degrees(y - Roll0) +2
+                Yawm = math.degrees(z - Yaw0) -150
+                if IMUData.IMURead():
+                    x, y, z = IMUData.getFusionData()
+                    Pitchm = 1/25*Pitchm + math.degrees(x - Pitch0) -3
+                    Rollm = 1/25*Rollm + math.degrees(y - Roll0) +2
+                    Yawm = 1/25*Yawm + math.degrees(z - Yaw0) -150
+            oPitch=Pitchm/5
+            oRoll = Rollm/5
+            oYaw = Yawm/5
             k = 0
             while k<15:
-				k = k + 1
-				x, y, z = IMUData.getFusionData()
-				Pitchm = math.degrees(x - Pitch0) -3
-				Rollm = math.degrees(y - Roll0) +2
-				Yawm = math.degrees(z - Yaw0) -150
-				if IMUData.IMURead():
-					x, y, z = IMUData.getFusionData()
-					Pitchm = 1/25*Pitchm + math.degrees(x - Pitch0) -3
-					Rollm = 1/25*Rollm + math.degrees(y - Roll0) +2
-					Yawm = 1/25*Yawm + math.degrees(z - Yaw0) -150
-			Pitch=Pitchm/5
-			Roll = Rollm/5
-			Yaw = Yawm/5
+                k = k + 1
+                x, y, z = IMUData.getFusionData()
+                Pitchm = math.degrees(x - Pitch0) -3
+                Rollm = math.degrees(y - Roll0) +2
+                Yawm = math.degrees(z - Yaw0) -150
+                if IMUData.IMURead():
+                    x, y, z = IMUData.getFusionData()
+                    Pitchm = 1/25*Pitchm + math.degrees(x - Pitch0) -3
+                    Rollm = 1/25*Rollm + math.degrees(y - Roll0) +2
+                    Yawm = 1/25*Yawm + math.degrees(z - Yaw0) -150
+            Pitch=Pitchm/5
+            Roll = Rollm/5
+            Yaw = Yawm/5
 
                 
 class ThreadControl (threading.Thread):
