@@ -21,6 +21,9 @@ from pyBBBDrone import *
 global Pitch
 global Roll
 global Yaw
+global oPitch
+global oRoll
+global oYaw
 Pitch = 0.0
 Roll = 0.0
 Yaw = 0.0
@@ -42,6 +45,9 @@ class ThreadIMU (threading.Thread):
         global Pitch
         global Roll
         global Yaw
+        global oPitch
+        global oRoll
+        global oYaw
         while True:
             k = 0
             while k<20:
