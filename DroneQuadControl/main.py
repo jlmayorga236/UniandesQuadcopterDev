@@ -61,12 +61,15 @@ class ThreadControl (threading.Thread):
         global Roll
         global Yaw
         global z
-        global M1 = 70 + 2.5*(0 - Pitch) - 2.5*(0 - Roll)
-        global M2 = 70 - 2.5*(0 - Pitch) + 2.5*(0 - Roll)
-        global M3 = 70 + 2.5*(0 - Pitch) - 2.5*(0 - Roll)
-        global M4 = 70 - 2.5*(0 - Pitch) + 2.5*(0 - Roll)
+        global M1
+        global M2 
+        global M3 
+        global M4
         while True:
-            W1 = 
+            M1 = 70 + 2.5*(0 - Pitch) - 2.5*(0 - Roll)
+            M2 = 70 - 2.5*(0 - Pitch) + 2.5*(0 - Roll)
+            M3 = 70 + 2.5*(0 - Pitch) - 2.5*(0 - Roll)
+            M4 = 70 - 2.5*(0 - Pitch) + 2.5*(0 - Roll) 
 
 class ThreadHTTP (threading.Thread):
     def __init__(self, threadID, name):
