@@ -58,7 +58,7 @@ class ThreadIMU (threading.Thread):
         global oYaw
         path = "Exp1.csv"
 	with open(path, "wb") as csv_file:
-        writer = csv.writer(csv_file, delimiter=',')
+        	writer = csv.writer(csv_file, delimiter=',')
 		while True:
 		    k = 0
 		    while k<20:
