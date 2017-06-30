@@ -9,14 +9,12 @@ import requests
 import random
 import sys, getopt
 import RTIMU
-import os.path
 import time
 import math
+import threading
 import Adafruit_BBIO.PWM as PWM
 import Adafruit_BBIO.ADC as ADC
-import threading
-
-
+import os.path
 sys.path.append('.')
 # ----------------------------------------------------------- #
 
@@ -32,7 +30,9 @@ SETTINGS_FILE = "RTIMULib"
 def computeHeight(pressure):
     return 44330.8 * (1 - pow(pressure / 1013.25, 0.190263));
 def init_Board():
+    print "---------------------------------------"
     print "HI! Welcome to Dron Uniandes Dev & Resch"
+    print "---------------------------------------"
     print  "......."
     print  "Initing ADC Pot..."
     ADC.setup()
@@ -41,19 +41,18 @@ def init_Board():
     PWM.start("P9_16", 50,500, 0)
     PWM.start("P9_21", 50,500, 0)
     PWM.start("P9_22", 50,500, 0)
-
     PWM.set_duty_cycle("P9_14", 50.5)
     PWM.set_duty_cycle("P9_16", 50.5)
     PWM.set_duty_cycle("P9_21", 50.5)
     PWM.set_duty_cycle("P9_22", 50.5)
-
     print "Waiting one second ...."
-    time.sleep(0.5)
     print "Thats it, ready to go"
     PWM.set_duty_cycle("P9_14", 60.5)
     PWM.set_duty_cycle("P9_16", 60.5)
     PWM.set_duty_cycle("P9_21", 60.5)
     PWM.set_duty_cycle("P9_22", 60.5)
+    time.sleep(0.5)
+    print "--------------------------------------"
 # ----------------------------------------------------------- #
 
 

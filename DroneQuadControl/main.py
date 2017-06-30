@@ -10,6 +10,7 @@ import random
 import time
 import math
 import threading
+import csv
 from pyBBBDrone import *
 # -------------------------------------------------- #
 
@@ -21,6 +22,10 @@ from pyBBBDrone import *
 global Pitch
 global Roll
 global Yaw
+global M1
+global M2
+global M3
+global M4
 global oPitch
 global oRoll
 global oYaw
@@ -51,37 +56,43 @@ class ThreadIMU (threading.Thread):
         global oPitch
         global oRoll
         global oYaw
-        while True:
-            k = 0
-            while k<20:
-                k = k + 1
-                x, y, z = IMUData.getFusionData()
-                Pitchm = math.degrees(x - Pitch0) -3
-                Rollm = math.degrees(y - Roll0) +2
-                Yawm = math.degrees(z - Yaw0) -150
-                if IMUData.IMURead():
-                    x, y, z = IMUData.getFusionData()
-                    Pitchm = 1/25*Pitchm + math.degrees(x - Pitch0) -3
-                    Rollm = 1/25*Rollm + math.degrees(y - Roll0) +2
-                    Yawm = 1/25*Yawm + math.degrees(z - Yaw0) -150
-            oPitch=Pitchm/5
-            oRoll = Rollm/5
-            oYaw = Yawm/5
-            k = 0
-            while k<15:
-                k = k + 1
-                x, y, z = IMUData.getFusionData()
-                Pitchm = math.degrees(x - Pitch0) -3
-                Rollm = math.degrees(y - Roll0) +2
-                Yawm = math.degrees(z - Yaw0) -150
-                if IMUData.IMURead():
-                    x, y, z = IMUData.getFusionData()
-                    Pitchm = 1/25*Pitchm + math.degrees(x - Pitch0) -3
-                    Rollm = 1/25*Rollm + math.degrees(y - Roll0) +2
-                    Yawm = 1/25*Yawm + math.degrees(z - Yaw0) -150
-                Pitch=Pitchm/5
-                Roll = Rollm/5
-                Yaw = Yawm/5
+        path = "Exp1.csv"
+	with open(path, "wb") as csv_file:
+        writer = csv.writer(csv_file, delimiter=',')
+		while True:
+		    k = 0
+		    while k<20:
+		        k = k + 1
+		        x, y, z = IMUData.getFusionData()
+		        Pitchm = math.degrees(x - Pitch0) -3
+		        Rollm = math.degrees(y - Roll0) +2
+		        Yawm = math.degrees(z - Yaw0) -150
+		        if IMUData.IMURead():
+		            x, y, z = IMUData.getFusionData()
+		            Pitchm = 1/25*Pitchm + math.degrees(x - Pitch0) -3
+		            Rollm = 1/25*Rollm + math.degrees(y - Roll0) +2
+		            Yawm = 1/25*Yawm + math.degrees(z - Yaw0) -150
+		    oPitch=Pitchm/5
+		    oRoll = Rollm/5
+		    oYaw = Yawm/5
+		    k = 0
+		    while k<15:
+		        k = k + 1
+		        x, y, z = IMUData.getFusionData()
+		        Pitchm = math.degrees(x - Pitch0) -3
+		        Rollm = math.degrees(y - Roll0) +2
+		        Yawm = math.degrees(z - Yaw0) -150
+		        if IMUData.IMURead():
+		            x, y, z = IMUData.getFusionData()
+		            Pitchm = 1/25*Pitchm + math.degrees(x - Pitch0) -3
+		            Rollm = 1/25*Rollm + math.degrees(y - Roll0) +2
+		            Yawm = 1/25*Yawm + math.degrees(z - Yaw0) -150
+		        Pitch=Pitchm/5
+		        Roll = Rollm/5
+		        Yaw = Yawm/5
+		    line1 = str(Pitch) + " , " +str(Roll) + " , "+str(Yaw) + " , " + str(z)
+		    line = line1.split(",")
+		    writer.writerow(line)
 
                 
 class ThreadControl (threading.Thread):
