@@ -31,6 +31,7 @@ global M4
 global oPitch
 global oRoll
 global oYaw
+global z
 oPitch = 0.0
 oRoll = 0
 oYaw = 0
@@ -58,6 +59,7 @@ class ThreadIMU (threading.Thread):
         global oPitch
         global oRoll
         global oYaw
+	global z
         path = "Exp1.csv"
 	with open(path, "wb") as csv_file:
         	writer = csv.writer(csv_file, delimiter=',')
@@ -92,7 +94,8 @@ class ThreadIMU (threading.Thread):
 		        Pitch=Pitchm/5
 		        Roll = Rollm/5
 		        Yaw = Yawm/5
-		    print str(170 - 10*ADC.read("P9_40"))
+		    z = 170 - 50*ADC.read("P9_40")
+		    print z
 		    line1 = str(Pitch) + " , " +str(Roll) + " , "+str(Yaw) + " , " + str(z)
 		    line = line1.split(",")
 		    writer.writerow(line)
