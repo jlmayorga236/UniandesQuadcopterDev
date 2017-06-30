@@ -60,7 +60,7 @@ class ThreadIMU (threading.Thread):
         global oRoll
         global oYaw
 	global z
-        path = "Exp1.csv"
+        path = "ExpLQR.csv"
 	with open(path, "wb") as csv_file:
         	writer = csv.writer(csv_file, delimiter=',')
 		while True:
@@ -125,7 +125,7 @@ class ThreadControl (threading.Thread):
             M3 = max(-5,min(5,0  + 0.05*(0 - Roll) - 0.01*(0 - Pitch)   + 0.5*(Roll - oRoll) + 0.5*(Pitch - oPitch)))
             M4 = max(-5,min(5,0  - 0.05*(0 - Roll) - 0.01*(0 - Pitch)   + 0.5*(Roll - oRoll) + 0.5*(Pitch - oPitch)))
      
-            SetMotorsPWM(95,M1,M2,M3,M4)
+            SetMotorsPWM(97,M1,M2,M3,M4)
 		
             print " "
             print("M1: %f M2: %f M3: %f M4: %f" % (M1,M2,M3,M4))
