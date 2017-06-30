@@ -12,7 +12,9 @@ import math
 import threading
 import csv
 from pyBBBDrone import *
+import Adafruit_BBIO.ADC as ADC
 # -------------------------------------------------- #
+
 
 
 
@@ -40,7 +42,7 @@ Yaw = 0.0
 
 
 
-
+v
 # -------------------------------------------------- # 
 # ---  Threads   ----------------------------------- #
 # -------------------------------------------------- #
@@ -90,6 +92,7 @@ class ThreadIMU (threading.Thread):
 		        Pitch=Pitchm/5
 		        Roll = Rollm/5
 		        Yaw = Yawm/5
+		    print ADC.read("P9_40")
 		    line1 = str(Pitch) + " , " +str(Roll) + " , "+str(Yaw) + " , " + str(z)
 		    line = line1.split(",")
 		    writer.writerow(line)
