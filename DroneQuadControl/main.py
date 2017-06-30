@@ -120,10 +120,10 @@ class ThreadControl (threading.Thread):
         global M4
         while True:
             
-            M1 = max(-5,min(5,0  + 0.05*(0 - Roll) + 0.05*(0 - Pitch)  + 0.5*(Roll - oRoll) + 0.5*(Pitch - oPitch) ))
-            M2 = max(-5,min(5,0  - 0.05*(0 - Roll) + 0.05*(0 - Pitch)  + 0.5*(Roll - oRoll) + 0.5*(Pitch - oPitch)))
-            M3 = max(-5,min(5,0  + 0.05*(0 - Roll) - 0.01*(0 - Pitch)   + 0.5*(Roll - oRoll) + 0.5*(Pitch - oPitch)))
-            M4 = max(-5,min(5,0  - 0.05*(0 - Roll) - 0.01*(0 - Pitch)   + 0.5*(Roll - oRoll) + 0.5*(Pitch - oPitch)))
+            M1 = 0.5*max(-5,min(5,0  + 0.1*(0 - Roll) + 0.1*(0 - Pitch)  + 0.25*(Roll - oRoll) + 0.25*(Pitch - oPitch) ))
+            M2 = 0.5*max(-5,min(5,0  - 0.1*(0 - Roll) + 0.1*(0 - Pitch)  + 0.25*(Roll - oRoll) + 0.25*(Pitch - oPitch)))
+            M3 = 0.5*max(-5,min(5,0  + 0.1*(0 - Roll) - 0.05*(0 - Pitch)   + 0.25*(Roll - oRoll) + 0.25*(Pitch - oPitch)))
+            M4 = 0.5*max(-5,min(5,0  - 0.1*(0 - Roll) - 0.05*(0 - Pitch)   + 0.25*(Roll - oRoll) + 0.25*(Pitch - oPitch)))
      
             SetMotorsPWM(96,M1,M2,M3,M4)
 		
