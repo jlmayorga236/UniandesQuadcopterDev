@@ -94,7 +94,7 @@ class ThreadIMU (threading.Thread):
 		        Pitch=Pitchm/5
 		        Roll = Rollm/5
 		        Yaw = Yawm/5
-		    z = ADC.read("P9_40")
+		    z = -397*ADC.read("P9_40")+166
 		    print z
 		    line1 = str(Pitch) + " , " +str(Roll) + " , "+str(Yaw) + " , " + str(z)
 		    line = line1.split(",")
