@@ -123,7 +123,7 @@ class ThreadControl (threading.Thread):
 		M3 = 0.5*max(-5,min(5,0  + 0.1*(0 - Roll) - 0.05*(0 - Pitch)   + 0.25*(Roll - oRoll) + 0.25*(Pitch - oPitch)))
 		M4 = 0.5*max(-5,min(5,0  - 0.1*(0 - Roll) - 0.05*(0 - Pitch)   + 0.25*(Roll - oRoll) + 0.25*(Pitch - oPitch)))
 		z = -397*ADC.read("P9_40")+165
-		TH = max(80,min(99, 80 + 120-z))
+		TH = max(80,min(99, 80 + 1.5*(110-z)))
 		print TH	
 		TH = 90
 		SetMotorsPWM(TH,M1,M2,M3,M4)
