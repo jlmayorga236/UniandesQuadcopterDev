@@ -163,6 +163,7 @@ class ThreadHTTP (threading.Thread):
                 r = requests.session()
                 r.keep_alive = False
             except Exception,e:
+		print ""
                 
              
             
