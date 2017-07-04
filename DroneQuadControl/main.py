@@ -123,16 +123,18 @@ class ThreadControl (threading.Thread):
             M2 = 0.5*max(-5,min(5,0  - 0.1*(0 - Roll) + 0.1*(0 - Pitch)  + 0.25*(Roll - oRoll) + 0.25*(Pitch - oPitch)))
             M3 = 0.5*max(-5,min(5,0  + 0.1*(0 - Roll) - 0.05*(0 - Pitch)   + 0.25*(Roll - oRoll) + 0.25*(Pitch - oPitch)))
             M4 = 0.5*max(-5,min(5,0  - 0.1*(0 - Roll) - 0.05*(0 - Pitch)   + 0.25*(Roll - oRoll) + 0.25*(Pitch - oPitch)))
+	    z = ADC.read("P9_40")
      	    TH = z
 	    print TH	
-	    TH =90
+	    TH = 90
             SetMotorsPWM(TH,M1,M2,M3,M4)
 		
             print " "
             print("M1: %f M2: %f M3: %f M4: %f" % (M1,M2,M3,M4))
-            print("Pitch: %f Roll: %f " % (Pitch,Roll))
-            print " "
-            time.sleep(0.5)
+            print("Pitch: %f Roll: %f  Yaw : %f" % (Pitch,Roll,Yaw))
+            print("z : %f cm " % (z))
+	    print " "
+            time.sleep(0.35)
 
 class ThreadHTTP (threading.Thread):
     def __init__(self, threadID, name):
@@ -163,7 +165,7 @@ class ThreadHTTP (threading.Thread):
                 r = requests.session()
                 r.keep_alive = False
             except Exception,e:
-                print "HTTP Get ERROR :("
+                
              
             
             
