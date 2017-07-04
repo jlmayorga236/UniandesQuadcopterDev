@@ -125,7 +125,6 @@ class ThreadControl (threading.Thread):
 		z = -397*ADC.read("P9_40")+165
 		TH = max(85,min(99, 90 + 1*(115-z)))
 		print TH	
-		TH = 90
 		SetMotorsPWM(TH,M1,M2,M3,M4)
 		print " "
 		print("M1: %f M2: %f M3: %f M4: %f" % (M1,M2,M3,M4))
