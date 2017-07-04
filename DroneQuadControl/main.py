@@ -130,7 +130,7 @@ class ThreadControl (threading.Thread):
 		print " "
 		print("M1: %f M2: %f M3: %f M4: %f" % (M1,M2,M3,M4))
 		print("Pitch: %f Roll: %f  Yaw : %f" % (Pitch,Roll,Yaw))
-		print("z : %f cm " % (z))
+		print("TH : %f PWM " % (TH))
 		print " "
 		time.sleep(0.35)
 
