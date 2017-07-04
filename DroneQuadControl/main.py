@@ -118,12 +118,12 @@ class ThreadControl (threading.Thread):
         global M3 
         global M4
         while True:
-		M1 = 0.5*max(-5,min(5,0  + 0.1*(0 - Roll) + 0.1*(0 - Pitch)  + 0.25*(Roll - oRoll) + 0.25*(Pitch - oPitch) ))
-		M2 = 0.5*max(-5,min(5,0  - 0.1*(0 - Roll) + 0.1*(0 - Pitch)  + 0.25*(Roll - oRoll) + 0.25*(Pitch - oPitch)))
-		M3 = 0.5*max(-5,min(5,0  + 0.1*(0 - Roll) - 0.05*(0 - Pitch)   + 0.25*(Roll - oRoll) + 0.25*(Pitch - oPitch)))
-		M4 = 0.5*max(-5,min(5,0  - 0.1*(0 - Roll) - 0.05*(0 - Pitch)   + 0.25*(Roll - oRoll) + 0.25*(Pitch - oPitch)))
+		M1 = 1*max(-5,min(5,0  + 0.25*(0 - Roll) + 0.1*(0 - Pitch)  + 0.25*(Roll - oRoll) + 0.25*(Pitch - oPitch) ))
+		M2 = 1*max(-5,min(5,0  - 0.25*(0 - Roll) + 0.1*(0 - Pitch)  + 0.25*(Roll - oRoll) + 0.25*(Pitch - oPitch)))
+		M3 = 1*max(-5,min(5,0  + 0.15*(0 - Roll) - 0.05*(0 - Pitch)   + 0.25*(Roll - oRoll) + 0.25*(Pitch - oPitch)))
+		M4 = 1*max(-5,min(5,0  - 0.15*(0 - Roll) - 0.05*(0 - Pitch)   + 0.25*(Roll - oRoll) + 0.25*(Pitch - oPitch)))
 		z = -397*ADC.read("P9_40")+165
-		TH = max(80,min(99, 80 + 1.5*(110-z)))
+		TH = max(80,min(99, 80 + 2.5*(115-z)))
 		print TH	
 		TH = 90
 		SetMotorsPWM(TH,M1,M2,M3,M4)
