@@ -94,7 +94,7 @@ class ThreadIMU (threading.Thread):
 		        Pitch=Pitchm/5
 		        Roll = Rollm/5
 		        Yaw = Yawm/5
-		    z = -397*ADC.read("P9_40")+166
+		    
 		    line1 = str(Pitch) + " , " +str(Roll) + " , "+str(Yaw) + " , " + str(z) 
 		    line = line1.split(",")
 		    writer.writerow(line)
@@ -122,7 +122,7 @@ class ThreadControl (threading.Thread):
 		M2 = 0.5*max(-5,min(5,0  - 0.1*(0 - Roll) + 0.1*(0 - Pitch)  + 0.25*(Roll - oRoll) + 0.25*(Pitch - oPitch)))
 		M3 = 0.5*max(-5,min(5,0  + 0.1*(0 - Roll) - 0.05*(0 - Pitch)   + 0.25*(Roll - oRoll) + 0.25*(Pitch - oPitch)))
 		M4 = 0.5*max(-5,min(5,0  - 0.1*(0 - Roll) - 0.05*(0 - Pitch)   + 0.25*(Roll - oRoll) + 0.25*(Pitch - oPitch)))
-		z = ADC.read("P9_40")
+		z = -397*ADC.read("P9_40")+166
 		TH = z
 		print TH	
 		TH = 90
